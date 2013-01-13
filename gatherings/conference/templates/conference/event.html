@@ -1,0 +1,33 @@
+{% extends "conference/base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="page-header">
+        <h2>
+            {{event.name}} {{year}}
+            <small>{{event.start|date:"N j"}} - {{event.end|date:"N j"}}</small>
+        </h2>
+    </div>
+    <p class="lead">{{event.description}}</p>
+</div>
+<div class="row">
+    <div class="span12">
+        <h3>Sessions</h3>
+        <div class="sessions">
+        {% for session in event.session_set.all %}
+            <div class="row session">
+                <div class="span9">
+                    <h4 class="session-name">{{session.name}}</h4>
+                    <p class="session-description">{{session.description}}<p>
+                </div>
+                <div class="span3">
+                    <p><a href="{% url conference_speaker session.speaker.pk %}">{{session.speaker.user.first_name}} {{session.speaker.user.last_name}}</a></p>
+                    <p>{{session.start}}</p>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

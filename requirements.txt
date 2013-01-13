@@ -1,0 +1,4 @@
+south
+psycopg2
+django-annoying
+django-extensions
