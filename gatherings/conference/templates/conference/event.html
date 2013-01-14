@@ -1,22 +1,20 @@
 {% extends "conference/base.html" %}
 
-{% block content %}
+{% block event-content %}
 <div class="row">
-    <div class="page-header">
-        <h2>
-            {{event.name}} {{year}}
-            <small>{{event.start|date:"N j"}} - {{event.end|date:"N j"}}</small>
-        </h2>
-    </div>
-    <p class="lead">{{event.description}}</p>
-</div>
-<div class="row">
-    <div class="span12">
+    <div class="span9">
+        <div class="page-header">
+            <h2>
+                {{event.name}}: {{year}}
+                <small>{{event.start|date:"N j"}} - {{event.end|date:"N j"}}</small>
+            </h2>
+        </div>
+        <p class="lead">{{event.description}}</p>
         <h3>Sessions</h3>
         <div class="sessions">
         {% for session in event.session_set.all %}
             <div class="row session">
-                <div class="span9">
+                <div class="span6">
                     <h4 class="session-name">{{session.name}}</h4>
                     <p class="session-description">{{session.description}}<p>
                 </div>
@@ -26,6 +24,8 @@
                 </div>
             </div>
             <hr>
+        {% empty %}
+            <p>No sessions have been added yet!</p>
         {% endfor %}
         </div>
     </div>

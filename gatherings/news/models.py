@@ -1,5 +1,7 @@
 from django.db import models
 
+from gatherings.news.managers import PostManager
+
 
 class Post(models.Model):
 
@@ -9,6 +11,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField('Tag')
+
+    objects = PostManager()
 
 
 class Tag(models.Model):

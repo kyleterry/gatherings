@@ -1,18 +1,26 @@
 <!doctype html>
 <html>
 <head>
-    <title></title>
+<title>Resistance Ecology: Conference - {% block title %} Let it happen{% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- bootstrap -->
     <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}css/bootstrap-responsive.css" rel="stylesheet">
+
+    <link href="{{STATIC_URL}}css/core.css" rel="stylesheet">
     {% block head %}
     {% endblock %}
 </head>
     <body>
         {% include "_header.html" %}
-        <div class="container">
+        <div class="container container-main">
         {% block content %}
         {% endblock %}
         </div>
         {% include "_footer.html" %}
+        
+        <script src="{{STATIC_URL}}js/jquery.js"></script>
+        <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
     </body>
 </html>
