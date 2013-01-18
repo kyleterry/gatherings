@@ -1,0 +1,28 @@
+{% extends "conference/base.html" %}
+
+{% block title %}Speakers{% endblock %}
+
+{% block event-content %}
+<div class="row">
+    <div class="span9">
+        <div class="page-header">
+            <h2>
+                Speakers
+            </h2>
+        </div>
+        <div class="speakers">
+        {% for speaker in speakers %}
+            <div class="row speaker">
+                <div class="span9">
+                    <p><a href="{% url conference_speaker speaker.pk %}">{{speaker.full_name}}</a></p>
+                    <p>{{speaker.bio}}</p>
+                </div>
+            </div>
+            <hr>
+        {% empty %}
+            <p>No speakers have been added yet!</p>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

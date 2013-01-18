@@ -43,5 +43,10 @@ class Speaker(models.Model):
     bio = models.TextField()
     user = models.ForeignKey(User)
 
+    @property
+    def full_name(self):
+        return '{first_name} {last_name}'.format(
+            first_name=self.user.first_name, last_name=self.user.last_name)
+
     def __unicode__(self):
-        return self.user.first_name
+        return self.full_name

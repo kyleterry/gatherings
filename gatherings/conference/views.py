@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.http import HttpResponseNotFound
 
 from annoying.decorators import render_to
@@ -39,8 +41,12 @@ def session(request, session_id):
 
 @render_to('conference/speakers.html')
 def speakers(self):
-    speakers = Speaker.objects.all()
-    news = latest_news()
+    now = datetime.now()
+    try:
+        event = Event.objects.get(start__year=now.year)
+    except Event.DoesNotExist:
+        return HttpResponseNotFound('<h1>404 Not Found</h1>')
+    speakers = Speaker.objects.filter(session__event=event)
     page = 'speakers'
     return locals()
 
