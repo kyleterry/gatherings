@@ -3,3 +3,6 @@ south
 psycopg2
 django-annoying
 django-extensions
+pil
+django-imagekit
+markdown

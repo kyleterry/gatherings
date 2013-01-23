@@ -25,7 +25,11 @@ header {
 }
 
 #map {
-    height: 400px;
+    height: 450px;
+}
+
+.speaker img {
+    margin-right: 5px;
 }
 
 footer {

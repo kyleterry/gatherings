@@ -1,4 +1,5 @@
 {% extends "conference/base.html" %}
+{% load markup %}
 
 {% block title %}Speakers{% endblock %}
 
@@ -14,8 +15,11 @@
         {% for speaker in speakers %}
             <div class="row speaker">
                 <div class="span9">
-                    <p><i class="icon-user"></i> <a href="{% url conference_speaker speaker.pk %}">{{speaker.full_name}}</a></p>
-                    <p>{{speaker.bio}}</p>
+                    <h3><i class="icon-user"></i> <a href="{% url conference_speaker speaker.pk %}">{{speaker.full_name}}</a></h3>
+                    {% if speaker.image %}
+                    <img class="pull-left" src="{{speaker.image_thumbnail.url}}">
+                    {% endif %}
+                    <p>{{speaker.bio|markdown}}</p>
                     {% if speaker.tags.exists %}
                     <p>
                         <i class="icon-tag"></i>

@@ -1,28 +1,47 @@
 <!doctype html>
 <html>
-<head>
-<title>Resistance Ecology: Conference - {% block title %} Let it happen{% endblock %}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <head>
+        <title>
+            {% block site_title %}
+                Resistance Ecology: Conference - 
+                {% block page_title %} Let it happen{% endblock page_title %}
+            {% endblock site_title %}
+        </title>
 
-    <!-- bootstrap -->
-    <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{STATIC_URL}}css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="{{STATIC_URL}}css/font-awesome.min.css", rel="stylesheet">
+        {% block meta %}
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {% endblock meta %}
 
-    <link href="{{STATIC_URL}}css/core.css" rel="stylesheet">
+        {% block css %}
+            <!-- bootstrap -->
+            <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
+            <link href="{{STATIC_URL}}css/bootstrap-responsive.css" rel="stylesheet">
+            <link href="{{STATIC_URL}}css/core.css" rel="stylesheet">
+        {% endblock css %}
 
-    {% block head %}
-    {% endblock %}
-</head>
+        {% block head %}
+        {% endblock head %}
+
+    </head>
     <body>
-        {% include "_header.html" %}
-        <div class="container container-main">
-        {% block content %}
-        {% endblock %}
-        </div>
-        {% include "_footer.html" %}
+        {% block body %}
+            {% block header %}
+                {% include "_header.html" %}
+            {% endblock header %}
 
-        <script src="{{STATIC_URL}}js/jquery.js"></script>
-        <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+            <div class="container container-main">
+            {% block content %}
+            {% endblock content %}
+            </div>
+
+            {% block footer %}
+                {% include "_footer.html" %}
+            {% endblock footer %}
+
+            {% block body_js %}
+                <script src="{{STATIC_URL}}js/jquery.js"></script>
+                <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+            {% endblock body_js %}
+        {% endblock body %}
     </body>
 </html>
