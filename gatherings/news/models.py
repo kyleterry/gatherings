@@ -10,7 +10,7 @@ class Post(models.Model):
     published = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    tags = models.ManyToManyField('Tag')
+    tags = models.ManyToManyField('Tag', null=True)
 
     objects = PostManager()
 

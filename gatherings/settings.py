@@ -106,6 +106,17 @@ TEMPLATE_DIRS = (
     join(PROJECT_ROOT, 'gatherings', 'templates'),
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+        'django.contrib.auth.context_processors.auth',
+        'django.core.context_processors.debug',
+        'django.core.context_processors.i18n',
+        'django.core.context_processors.media',
+        'django.core.context_processors.static',
+        'django.core.context_processors.tz',
+        'gatherings.news.context_processors.latest_news',
+        'django.contrib.messages.context_processors.messages',
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -115,6 +126,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'django.contrib.markup',
+    'gatherings.cms',
     'gatherings.conference',
     'gatherings.news',
     'south',

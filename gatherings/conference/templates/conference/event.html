@@ -1,4 +1,5 @@
 {% extends "conference/base.html" %}
+{% load markup %}
 
 {% block title %}{{event.name}} {{year}}{% endblock %}
 
@@ -18,11 +19,15 @@
             <div class="row session">
                 <div class="span6">
                     <h4 class="session-name">{{session.name}}</h4>
-                    <p class="session-description">{{session.description}}<p>
+                    <p class="session-description">{{session.description|markdown:"safe"}}<p>
                 </div>
                 <div class="span3">
-                    <p><a href="{% url conference_speaker session.speaker.pk %}">{{session.speaker.user.first_name}} {{session.speaker.user.last_name}}</a></p>
-                    <p>{{session.start}}</p>
+                    <p>{% if session.speakers.count > 1 %}<i class="icon-group"></i>{% else %}<i class="icon-user"></i>{% endif %}
+                        {% for speaker in session.speakers.all %}
+                        <a href="{% url conference_speaker speaker.pk %}">{{speaker.full_name}}</a>{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    </p>
+                    <p><i class="icon-time"></i> {{session.start}}</p>
                 </div>
             </div>
             <hr>

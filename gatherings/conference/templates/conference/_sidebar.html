@@ -1,6 +1,12 @@
-<div class="page-header">
-    <h4>Social</h4>
+<div class="social">
+    <a href=""><i class="icon-facebook-sign"></i></a>
+    <a href="https://twitter.com/resistanceecology"><i class="icon-twitter-sign"></i></a>
 </div>
+{% if news.count > 0 %}
 <div class="page-header">
     <h4>Latest News</h4>
 </div>
+{% for post in news %}
+<p><i class="icon-file-alt"></i> <a href="{% url news_view_post post.pk %}">{{ post.title }}</a></p>
+{% endfor %}
+{% endif %}

@@ -31,7 +31,7 @@ class Session(models.Model):
     description = models.TextField()
     event = models.ForeignKey('Event')
     room = models.ForeignKey('Room', null=True, blank=True)
-    speaker = models.ForeignKey('Speaker')
+    speakers = models.ManyToManyField('Speaker')
     start = models.DateTimeField()
     end = models.DateTimeField()
 
@@ -42,6 +42,7 @@ class Session(models.Model):
 class Speaker(models.Model):
     bio = models.TextField()
     user = models.ForeignKey(User)
+    tags = models.ManyToManyField('SpeakerTag', null=True, blank=True)
 
     @property
     def full_name(self):
@@ -50,3 +51,11 @@ class Speaker(models.Model):
 
     def __unicode__(self):
         return self.full_name
+
+
+class SpeakerTag(models.Model):
+
+    name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.name

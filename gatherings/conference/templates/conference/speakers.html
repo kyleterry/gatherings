@@ -14,8 +14,16 @@
         {% for speaker in speakers %}
             <div class="row speaker">
                 <div class="span9">
-                    <p><a href="{% url conference_speaker speaker.pk %}">{{speaker.full_name}}</a></p>
+                    <p><i class="icon-user"></i> <a href="{% url conference_speaker speaker.pk %}">{{speaker.full_name}}</a></p>
                     <p>{{speaker.bio}}</p>
+                    {% if speaker.tags.exists %}
+                    <p>
+                        <i class="icon-tag"></i>
+                        {% for tag in speaker.tags.all %}
+                            <span class="label label-info">{{tag.name}}</span>
+                        {% endfor %}
+                    </p>
+                    {% endif %}
                 </div>
             </div>
             <hr>

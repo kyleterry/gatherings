@@ -8,14 +8,8 @@ from gatherings.conference.models import Event, Speaker
 from gatherings.news.models import Post
 
 
-def latest_news():
-    news = Post.objects.published.order_by('-created_at')[:10]
-    return news
-
-
 @render_to('conference/home.html')
 def home(request):
-    news = latest_news()
     page = 'home'
     return locals()
 
@@ -26,7 +20,6 @@ def event(request, year):
         event = Event.objects.get(start__year=year)
     except Event.DoesNotExist:
         return HttpResponseNotFound('<h1>404 Not Found</h1>')
-    news = latest_news()
     page = 'sessions'
     return locals()
 
@@ -35,8 +28,6 @@ def event(request, year):
 def session(request, session_id):
     session = Session.objects.get(pk=session_id)
     page = 'sessions'
-    news = latest_news()
-    return locals()
 
 
 @render_to('conference/speakers.html')
@@ -46,7 +37,7 @@ def speakers(self):
         event = Event.objects.get(start__year=now.year)
     except Event.DoesNotExist:
         return HttpResponseNotFound('<h1>404 Not Found</h1>')
-    speakers = Speaker.objects.filter(session__event=event)
+    speakers = Speaker.objects.filter(session__event=event).distinct()
     page = 'speakers'
     return locals()
 
