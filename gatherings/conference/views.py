@@ -4,7 +4,8 @@ from django.http import HttpResponseNotFound
 
 from annoying.decorators import render_to
 
-from gatherings.conference.models import Event, Speaker
+from gatherings.conference.models import (Event, Speaker, SESSION_TYPE_BREAK,
+        SESSION_TYPE_TALK, SESSION_TYPE_LIGHTNING_TALK)
 from gatherings.news.models import Post
 
 
@@ -21,6 +22,7 @@ def event(request, year):
     except Event.DoesNotExist:
         return HttpResponseNotFound('<h1>404 Not Found</h1>')
     page = 'sessions'
+
     return locals()
 
 
@@ -45,4 +47,8 @@ def speakers(self):
 @render_to('conference/speaker.html')
 def speaker(request, speaker_id):
     speaker = Speaker.objects.get(pk=speaker_id)
+    return locals()
+
+@render_to('conference/speaker_edit.html')
+def speaker_edit(request):
     return locals()

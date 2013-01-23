@@ -1,33 +1,78 @@
 {% extends "conference/base.html" %}
 {% load markup %}
 
-{% block title %}{{event.name}} {{year}}{% endblock %}
+{% block title %}{{event.name}}{% endblock %}
+
+{% block body_js %}{{block.super}}
+    <script>
+        $(function() {
+            $('.short-schedule-toggle').click(function() {
+                $('.short-schedule').toggle('fast');
+                $('.short-schedule-toggle-text').toggle();
+            });
+        });
+    </script>
+{% endblock %}
 
 {% block event-content %}
 <div class="row">
     <div class="span9">
         <div class="page-header">
             <h2>
-                {{event.name}}: {{year}}
+                {{event.name}}
                 <small>{{event.start|date:"N j"}} - {{event.end|date:"N j"}}</small>
             </h2>
         </div>
         <p class="lead">{{event.description}}</p>
         <h3>Sessions</h3>
+        <hr>
+        <h4>Short Schedule
+            <small class="short-schedule-toggle">
+                <span class="short-schedule-toggle-text"><i class="icon-caret-up"></i> hide</span>
+                <span class="short-schedule-toggle-text" style="display:none;"><i class="icon-caret-down"></i> show</span>
+            </small>
+        </h4>
+        {% for day, sessions in event.sessions_by_days_struct.items %}
+        {% if sessions %}
+        <h4>{{day|date:"l"}}</h4>
+        <table class="table table-striped short-schedule">
+            <tbody>
+                {% for session in sessions %}
+                <tr class="{% if session.is_break %}break info{% endif %}">
+                    <td>{{session.start}}</td>
+                    <td>{% if session.speakers.exists %}
+                        {% for speaker in session.speakers.all %}{{speaker.full_name}}{% if not forloop.last %}, {% endif %}{% endfor %}<br>
+                        {% endif %}
+                        {% if session.is_break %}<i class="icon-coffee"></i>{% endif %}
+                        <a href="#{{session.name|slugify}}">{{session.name}}</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% endfor %}
         <div class="sessions">
-        {% for session in event.session_set.all %}
-            <div class="row session">
+        {% for session in event.session_set.ordered_for_event_display %}
+            <div class="row-fluid session">
+                <a href="#{{session.name|slugify}}" name="{{session.name|slugify}}"></a>
                 <div class="span6">
-                    <h4 class="session-name">{{session.name}}</h4>
-                    <p class="session-description">{{session.description|markdown:"safe"}}<p>
+                    <h4 class="session-name">
+                        {% if session.is_break %}<i class="icon-coffee"></i>{% endif %}
+                        <a href="#{{session.name|slugify}}">{{session.name}}</a> <span class="muted"><a href="#top"><i class="icon-caret-up"></i></a></span>
+                    </h4>
+                    <div class="session-description">{{session.description|markdown:"safe"}}</div>
                 </div>
-                <div class="span3">
-                    <p>{% if session.speakers.count > 1 %}<i class="icon-group"></i>{% else %}<i class="icon-user"></i>{% endif %}
+                <div class="span3 offset2 session-meta">
+                    {% if session.speakers.exists %}
+                    <p>{% if session.speakers.count > 1 %}<i class="icon-group" title="Panel session"></i>{% else %}<i class="icon-user" title="One speaker"></i>{% endif %}
                         {% for speaker in session.speakers.all %}
                         <a href="{% url conference_speaker speaker.pk %}">{{speaker.full_name}}</a>{% if not forloop.last %},{% endif %}
                         {% endfor %}
                     </p>
-                    <p><i class="icon-time"></i> {{session.start}}</p>
+                    {% endif %}
+                    <p><i class="icon-time" title="Session time"></i> {{session.start|date:"D, N j P"}} - {{session.end|date:"P"}}</p>
+                    <p><i class="icon-flag" title="Room #"></i> {% if session.room %}{{session.room.name}}{% else %}TBA{% endif %}</p>
                 </div>
             </div>
             <hr>

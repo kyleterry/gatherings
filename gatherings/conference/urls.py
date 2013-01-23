@@ -5,4 +5,5 @@ urlpatterns = patterns('gatherings.conference.views',
     url(r'^events/(?P<year>\d{4})/', 'event', name='conference_event'),
     url(r'^speakers/', 'speakers', name='conference_speakers'),
     url(r'^speaker/(?P<speaker_id>\d)/', 'speaker', name='conference_speaker'),
+    url(r'^profile/edit', 'speaker_edit', name='conference_speaker_edit'),
 )

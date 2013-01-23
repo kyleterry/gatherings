@@ -16,6 +16,7 @@
             <!-- bootstrap -->
             <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
             <link href="{{STATIC_URL}}css/bootstrap-responsive.css" rel="stylesheet">
+            <link href="{{STATIC_URL}}css/font-awesome.min.css" rel="stylesheet">
             <link href="{{STATIC_URL}}css/core.css" rel="stylesheet">
         {% endblock css %}
 
@@ -39,7 +40,7 @@
             {% endblock footer %}
 
             {% block body_js %}
-                <script src="{{STATIC_URL}}js/jquery.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
                 <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
             {% endblock body_js %}
         {% endblock body %}

@@ -16,17 +16,19 @@
             <div class="row speaker">
                 <div class="span9">
                     <h3><i class="icon-user"></i> <a href="{% url conference_speaker speaker.pk %}">{{speaker.full_name}}</a></h3>
-                    {% if speaker.image %}
-                    <img class="pull-left" src="{{speaker.image_thumbnail.url}}">
-                    {% endif %}
-                    <p>{{speaker.bio|markdown}}</p>
+                    <div class="bio">
+                        {% if speaker.image %}
+                        <img class="pull-left" src="{{speaker.image_thumbnail.url}}">
+                        {% endif %}
+                        {{speaker.bio|markdown}}
+                    </div>
                     {% if speaker.tags.exists %}
-                    <p>
+                    <div class="clearfix">
                         <i class="icon-tag"></i>
                         {% for tag in speaker.tags.all %}
                             <span class="label label-info">{{tag.name}}</span>
                         {% endfor %}
-                    </p>
+                    </div>
                     {% endif %}
                 </div>
             </div>

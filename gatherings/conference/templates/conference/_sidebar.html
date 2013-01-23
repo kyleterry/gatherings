@@ -7,6 +7,8 @@
     <h4>Latest News</h4>
 </div>
 {% for post in news %}
-<p><i class="icon-file-alt"></i> <a href="{% url news_view_post post.pk %}">{{ post.title }}</a></p>
+    <p><i class="icon-file-alt"></i> <a href="{% url news_view_post post.pk %}">{{ post.title }}</a></p>
+{% empty %}
+    <p>Nothin' yet.</p>
 {% endfor %}
 {% endif %}

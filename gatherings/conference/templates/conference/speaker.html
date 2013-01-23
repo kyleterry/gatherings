@@ -1,4 +1,47 @@
 {% extends "conference/base.html" %}
-{% block content %}>}
-SPEAKER PROFILE FOR {{speaker.user.username}}
+{% load markup %}
+
+{% block title %}Profile for {{speaker.full_name}}{% endblock %}
+
+{% block event-content %}
+<div class="row">
+    <div class="span9">
+        <div class="page-header">
+            <h2>
+                {{speaker.full_name}}
+            </h2>
+        </div>
+        <div class="speakers">
+            <div class="row speaker">
+                <div class="span9">
+                    <h3><i class="icon-user"></i> <a href="{% url conference_speaker speaker.pk %}">{{speaker.full_name}}</a></h3>
+                    <div class="bio">
+                        {% if speaker.image %}
+                        <img class="pull-left" src="{{speaker.image_thumbnail.url}}">
+                        {% endif %}
+                        {{speaker.bio|markdown}}
+                    </div>
+                    {% if speaker.tags.exists %}
+                    <div class="clearfix">
+                        <i class="icon-tag"></i>
+                        {% for tag in speaker.tags.all %}
+                            <span class="label label-info">{{tag.name}}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="page-header">
+            <h2>Sessions</h2>
+        </div>
+        {% for session in speaker.session_set.all %}
+        <div class="session">
+            <h3><a href="{% url conference_event 2013 %}#{{session.name|slugify}}">{{session.name}}</a></h3>
+            {{session.description|markdown:"safe"}}
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

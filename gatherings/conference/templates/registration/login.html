@@ -1,0 +1,22 @@
+{% extends "base.html"%}
+
+{% block content %}
+<div class="row">
+    <div class="span12">
+        <form method="post" action="{% url login %}" class="form-horizontal">
+            {% csrf_token %}
+            <div class="control-group">
+                <div class="controls">
+                    {{form}}
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn">Sign in</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

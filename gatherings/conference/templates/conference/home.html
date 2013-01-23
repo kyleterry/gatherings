@@ -12,11 +12,15 @@
 {% block body_js %}
 <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
 <script>
-    var map = L.map('map').setView([45.5236, -122.6750], 16);
+    var map = L.map('map').setView([45.511827, -122.684079], 18);
     L.tileLayer('http://{s}.tile.cloudmade.com/8b9e53c586bb4155ac590bd5ccf46bc1/997/256/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-        maxZoom: 20
+        maxZoom: 18
     }).addTo(map);
+    L.marker([45.511827, -122.684079]).addTo(map)
+        .bindPopup('Resistance Ecology Conference 2013!')
+        .openPopup();
+
 </script>
 {% endblock body_js %}
 
@@ -26,7 +30,9 @@
             <div id='map'></div>
         </div>
         <div class="span6">
-            Home!
+            <h2>Join us at Portland State University!</h2>
+            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
         </div>
 </div>
     <hr>
@@ -36,7 +42,7 @@
         <div id="news">
         {% for post in news %}
         <div class="article">
-            <h4>{{post.title}} <small>{{post.created_at}}</small></h4>
+            <h4><a href="{% url news_view_post post.pk %}">{{post.title}}</a> <small>{{post.created_at}}</small></h4>
             <p>{{post.content|markdown:"safe"}}</p>
             {% if post.tags.count > 0 %}
             <div class="tags">

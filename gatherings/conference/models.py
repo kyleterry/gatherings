@@ -1,7 +1,11 @@
+from datetime import timedelta
+
 from django.contrib.auth.models import User
 from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, Adjust
+
+from gatherings.conference.managers import SessionManager
 
 
 class Event(models.Model):
@@ -12,6 +16,17 @@ class Event(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_datetimes(self):
+        return [self.start + timedelta(days=x) for x in range(0,
+            (self.end.date() - self.start.date()).days + 1)]
+
+    @property
+    def sessions_by_days_struct(self):
+        sessions = {}
+        for dt in self.get_datetimes():
+            sessions[dt] = self.session_set.filter(start__startswith=dt.date())
+        return sessions
 
 
 class Track(models.Model):
@@ -28,17 +43,34 @@ class Room(models.Model):
         return self.name
 
 
+SESSION_TYPE_TALK = 1
+SESSION_TYPE_LIGHTNING_TALK = 2
+SESSION_TYPE_BREAK = 3
+SESSION_TYPE_CHOICES = (
+    (SESSION_TYPE_TALK, 'Talk'),
+    (SESSION_TYPE_LIGHTNING_TALK, 'Lightning Talk'),
+    (SESSION_TYPE_BREAK, 'Break'),
+)
+
 class Session(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     event = models.ForeignKey('Event')
     room = models.ForeignKey('Room', null=True, blank=True)
-    speakers = models.ManyToManyField('Speaker')
+    speakers = models.ManyToManyField('Speaker', null=True, blank=True)
+    session_type = models.IntegerField(default=SESSION_TYPE_TALK,
+                                       choices=SESSION_TYPE_CHOICES)
     start = models.DateTimeField()
     end = models.DateTimeField()
 
+    objects = SessionManager()
+
     def __unicode__(self):
         return self.name
+
+    @property
+    def is_break(self):
+        return self.session_type == SESSION_TYPE_BREAK
 
 
 class Speaker(models.Model):
@@ -47,7 +79,7 @@ class Speaker(models.Model):
     tags = models.ManyToManyField('SpeakerTag', null=True, blank=True)
     image = models.ImageField(upload_to='speaker_images', null=True, blank=True)
     image_thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
-                                     ResizeToFill(100, 100)],
+                                     ResizeToFill(130, 130)],
                                      image_field='image',
                                      format='PNG',
                                      options={'quality': 90})
