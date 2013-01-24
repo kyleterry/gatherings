@@ -114,6 +114,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         'django.core.context_processors.static',
         'django.core.context_processors.tz',
         'gatherings.news.context_processors.latest_news',
+        'gatherings.conference.context_processors.next_event',
         'django.contrib.messages.context_processors.messages',
 )
 

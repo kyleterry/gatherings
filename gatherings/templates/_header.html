@@ -1,41 +1,12 @@
 <header class="jumbotron subhead">
     <div class="container">
         <div class="row header-contents">
-            <ul class="nav nav-user pull-right">
-                {% if not request.user.is_authenticated %}
-                <li>
-                    <a href="{% url login %}">Login</a>
-                </li>
-                {% else %}
-                <li>
-                <i class="icon-user"></i> <a href="{% url conference_speaker_edit %}">{{request.user.username}}</a>
-                </li>
-                <li>
-                <i class="icon-signout"></i> <a href="{% url logout %}">logout</a>
-                </li>
-                {% endif %}
-            </ul>
-            <ul class="nav nav-pills pull-right">
-                <li class="{% if page == 'home' %}active{% endif %}">
-                    <a href="{% url home %}"><i class="icon-home"></i> Home</a>
-                </li>
-                <li class="{% if page == 'sessions' %}active{% endif %}">
-                    <a href="{% url conference_event 2013 %}"><i class="icon-calendar"></i> Sessions</a>
-                </li>
-                <li class="{% if page == 'speakers' %}active{% endif %}">
-                    <a href="{% url conference_speakers %}"><i class="icon-bullhorn"></i> Speakers</a>
-                </li>
-                <li>
-                    <a href="#"><i class="icon-building"></i> Venue</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-            </ul>
-            <h3>RE<span class="muted">C<i class="icon-screenshot"></i>N</span></h3>
+            {% include "_user_nav.html" %}
+            {% include "_nav.html" %}
+            <h1>RE<span class="muted">C<i class="icon-screenshot"></i>N</span></h1>
         </div>
         <div class="pull-right conference-date">
-            <span class="label label-info">June 1 - 3, 2013 in Portland, OR</span>
+            <span class="label label-info">{{next_event.start|date:"N jS"}} - {{next_event.end|date:"N jS"}} in Portland, OR</span>
         </div>
     </div>
 </header>

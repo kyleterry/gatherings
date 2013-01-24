@@ -1,0 +1,23 @@
+            <ul class="nav nav-pills pull-right">
+                <li class="{% if page == 'home' %}active{% endif %}">
+                    <a href="{% url home %}"><i class="icon-home"></i> Home</a>
+                </li>
+                <li class="{% if page == 'sessions' %}active{% endif %}">
+                    <a href="{% url conference_event 2013 %}"><i class="icon-calendar"></i> Sessions</a>
+                </li>
+                <li class="{% if page == 'speakers' %}active{% endif %}">
+                    <a href="{% url conference_speakers %}"><i class="icon-bullhorn"></i> Speakers</a>
+                </li>
+                <li>
+                    <a href="#"><i class="icon-building"></i> Venue</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        About
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </li>
+            </ul>
