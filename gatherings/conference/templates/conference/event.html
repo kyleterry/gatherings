@@ -59,7 +59,8 @@
                 <div class="span6">
                     <h4 class="session-name">
                         {% if session.is_break %}<i class="icon-coffee"></i>{% endif %}
-                        <a href="#{{session.name|slugify}}">{{session.name}}</a> <span class="muted"><a href="#top"><i class="icon-caret-up"></i></a></span>
+                        <a href="#{{session.name|slugify}}">{{session.name}}</a>
+                        <span class="muted"><a href="#top"><i class="icon-caret-up"></i></a></span>
                     </h4>
                     <div class="session-description">{{session.description|markdown:"safe"}}</div>
                 </div>
@@ -72,7 +73,9 @@
                     </p>
                     {% endif %}
                     <p><i class="icon-time" title="Session time"></i> {{session.start|date:"D, N j P"}} - {{session.end|date:"P"}}</p>
+                    {% if not session.is_break %}
                     <p><i class="icon-flag" title="Room #"></i> {% if session.room %}{{session.room.name}}{% else %}TBA{% endif %}</p>
+                    {% endif %}
                 </div>
             </div>
             <hr>

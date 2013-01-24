@@ -25,7 +25,8 @@ class Event(models.Model):
     def sessions_by_days_struct(self):
         sessions = {}
         for dt in self.get_datetimes():
-            sessions[dt] = self.session_set.filter(start__startswith=dt.date())
+            sessions[dt] = self.session_set.filter(
+                start__startswith=dt.date()).order_by('start')
         return sessions
 
 
