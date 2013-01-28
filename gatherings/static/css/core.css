@@ -72,6 +72,9 @@ header {
     display: inline;
 }
 
+#id_bio {
+    height: 300px;
+}
 
 footer {
     background-color: #F5F5F5;

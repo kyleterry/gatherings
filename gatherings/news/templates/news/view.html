@@ -10,7 +10,7 @@
             <a href="{% url news_list %}"><i class="icon-double-angle-left"></i> Back to news</a>
         </div>
         <div class="page-header"><h2>{{post.title}}</h2></div>
-        {{post.content|markdown:"safe"}}
+        {{post.content|markdown}}
         {% if post.tags.exists %}
         <div class="post-tags">
             <i class="icon-tag"></i>

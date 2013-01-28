@@ -10,7 +10,7 @@
         {% for post in news %}
         <div class="post">
             <h3><a href="{% url news_view_post post.pk %}">{{post.title}}</a></h3>
-            {{post.content|markdown:"safe"}}
+            {{post.content|markdown}}
             {% if post.tags.exists %}
             <div class="post-tags">
                 <i class="icon-tag"></i>

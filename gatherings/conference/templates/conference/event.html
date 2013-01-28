@@ -62,7 +62,7 @@
                         <a href="#{{session.name|slugify}}">{{session.name}}</a>
                         <span class="muted"><a href="#top"><i class="icon-caret-up"></i></a></span>
                     </h4>
-                    <div class="session-description">{{session.description|markdown:"safe"}}</div>
+                    <div class="session-description">{{session.description|markdown}}</div>
                 </div>
                 <div class="span3 offset2 session-meta">
                     {% if session.speakers.exists %}
