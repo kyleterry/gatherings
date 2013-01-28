@@ -6,6 +6,7 @@ from annoying.decorators import render_to
 
 from gatherings.conference.models import (Event, Speaker, SESSION_TYPE_BREAK,
         SESSION_TYPE_TALK, SESSION_TYPE_LIGHTNING_TALK)
+from gatherings.conference.forms import SpeakerForm
 from gatherings.news.models import Post
 from gatherings.cms.models import Page
 
@@ -59,6 +60,14 @@ def speaker(request, speaker_id):
     speaker = Speaker.objects.get(pk=speaker_id)
     return locals()
 
+
 @render_to('conference/speaker_edit.html')
 def speaker_edit(request):
+    speaker_form = SpeakerForm(instance=Speaker.objects.get(user=request.user))
+    if request.method == 'POST':
+        speaker_form = SpeakerForm(data=request.POST or None,
+                                instance=Speaker.objects.get(user=request.user))
+        if speaker_form.is_valid():
+            speaker_form.save()
+            profile_saved = True
     return locals()

@@ -1,0 +1,36 @@
+{% extends "conference/base.html" %}
+
+
+{% block event-content %}
+<div class="row">
+    <div class="span9">
+        {% if profile_saved %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Yay!</strong> Your profile has been saved.
+        </div>
+        {% endif %}
+        {% if form.errors %}
+        {% for error in form.errors %}
+        <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Error!</strong> {{error}}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {{form.errors}}
+        <div class="page-header">
+            <h2>Profile Edit</h2>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="control-group">
+                <div class="controls">
+                    <textarea class="span9" id="id_bio" name="bio" placeHolder="Enter your bio here.">{{speaker_form.bio.value}}</textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn">Save</button> <a href="{% url home %}">cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -39,7 +39,7 @@
         {% for session in speaker.session_set.all %}
         <div class="session">
             <h3><a href="{% url conference_event 2013 %}#{{session.name|slugify}}">{{session.name}}</a></h3>
-            {{session.description|markdown:"safe"}}
+            {{session.description|markdown}}
         </div>
         {% endfor %}
     </div>
