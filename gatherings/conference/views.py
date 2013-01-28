@@ -63,6 +63,8 @@ def speaker(request, speaker_id):
 
 @render_to('conference/speaker_edit.html')
 def speaker_edit(request):
+    if not Speaker.objects.filter(user=request.user).exists():
+        Speaker.objects.create(user=request.user)
     speaker_form = SpeakerForm(instance=Speaker.objects.get(user=request.user))
     if request.method == 'POST':
         speaker_form = SpeakerForm(data=request.POST or None,
