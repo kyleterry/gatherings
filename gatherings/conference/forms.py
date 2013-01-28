@@ -7,4 +7,4 @@ class SpeakerForm(forms.ModelForm):
 
     class Meta:
         model = Speaker
-        fields = ('bio',)
+        fields = ('bio', 'image')
