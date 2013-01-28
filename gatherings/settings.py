@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'gatherings.conference',
     'gatherings.news',
     'south',
+    'gunicorn',
 )
 
 # A sample logging configuration. The only tangible logging

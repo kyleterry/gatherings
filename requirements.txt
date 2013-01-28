@@ -6,3 +6,4 @@ django-extensions
 pil
 django-imagekit
 markdown
+gunicorn
