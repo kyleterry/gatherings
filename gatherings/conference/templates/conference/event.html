@@ -26,32 +26,32 @@
         <p class="lead">{{event.description}}</p>
         <h3>Sessions</h3>
         <hr>
-        <h4>Short Schedule
-            <small class="short-schedule-toggle">
-                <span class="short-schedule-toggle-text"><i class="icon-caret-up"></i> hide</span>
-                <span class="short-schedule-toggle-text" style="display:none;"><i class="icon-caret-down"></i> show</span>
-            </small>
-        </h4>
-        {% for day, sessions in event.sessions_by_days_struct.items %}
-        {% if sessions %}
-        <h4>{{day|date:"l"}}</h4>
-        <table class="table table-striped short-schedule">
-            <tbody>
-                {% for session in sessions %}
-                <tr class="{% if session.is_break %}break info{% endif %}">
-                    <td>{{session.start}}</td>
-                    <td>{% if session.speakers.exists %}
-                        {% for speaker in session.speakers.all %}{{speaker.full_name}}{% if not forloop.last %}, {% endif %}{% endfor %}<br>
-                        {% endif %}
-                        {% if session.is_break %}<i class="icon-coffee"></i>{% endif %}
-                        <a href="#{{session.name|slugify}}">{{session.name}}</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
-        {% endfor %}
+        <small class="short-schedule-toggle">
+            <span class="short-schedule-toggle-text"><i class="icon-caret-up"></i> HIDE</span>
+            <span class="short-schedule-toggle-text" style="display:none;"><i class="icon-caret-down"></i> SHOW</span>
+        </small>
+        <div class="short-schedule">
+            {% for day, sessions in event.sessions_by_days_struct.items %}
+            {% if sessions %}
+            <h4>{{day|date:"l"}}</h4>
+            <table class="table table-striped">
+                <tbody>
+                    {% for session in sessions %}
+                    <tr class="{% if session.is_break %}break info{% endif %}">
+                        <td style="width: 50%"><i class="icon-time"></i> {{session.start|date:"P"}}</td>
+                        <td>{% if session.speakers.exists %}
+                            {% for speaker in session.speakers.all %}{{speaker.full_name}}{% if not forloop.last %}, {% endif %}{% endfor %}<br>
+                            {% endif %}
+                            {% if session.is_break %}<i class="icon-coffee"></i>{% endif %}
+                            <a href="#{{session.name|slugify}}">{{session.name}}</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+            {% endfor %}
+        </div>
         <div class="sessions">
         {% for session in event.session_set.ordered_for_event_display %}
             <div class="row-fluid session">

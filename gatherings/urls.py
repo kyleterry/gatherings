@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'gatherings.views.home', name='home'),
     url(r'^', include('gatherings.conference.urls')),
     url(r'^', include('gatherings.news.urls')),
+    url(r'^', include('gatherings.cms.urls')),
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

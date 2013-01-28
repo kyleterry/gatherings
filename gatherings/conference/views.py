@@ -7,11 +7,16 @@ from annoying.decorators import render_to
 from gatherings.conference.models import (Event, Speaker, SESSION_TYPE_BREAK,
         SESSION_TYPE_TALK, SESSION_TYPE_LIGHTNING_TALK)
 from gatherings.news.models import Post
+from gatherings.cms.models import Page
 
 
 @render_to('conference/home.html')
 def home(request):
     page = 'home'
+    home_page, created = Page.objects.get_or_create(title='Home Page')
+    if created:
+        home_page.content = 'This is your temporary home page. Edit it in the admin'
+        home_page.save()
     return locals()
 
 

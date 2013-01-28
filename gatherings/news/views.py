@@ -6,7 +6,7 @@ from gatherings.news.models import Post
 
 @render_to('news/list.html')
 def list_all(request):
-    news = Post.objects.published
+    news = Post.objects.published.order_by('-created_at')
     return locals()
 
 

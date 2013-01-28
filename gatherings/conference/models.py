@@ -73,6 +73,14 @@ class Session(models.Model):
     def is_break(self):
         return self.session_type == SESSION_TYPE_BREAK
 
+    @property
+    def is_talk(self):
+        return self.session_type == SESSION_TYPE_TALK
+
+    @property
+    def is_lightning_talk(self):
+        return self.session_type == SESSION_TYPE_LIGHTNING_TALK
+
 
 class Speaker(models.Model):
     bio = models.TextField()
