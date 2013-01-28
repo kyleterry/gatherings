@@ -15,7 +15,7 @@ def home(request):
     page = 'home'
     home_page, created = Page.objects.get_or_create(title='Home Page')
     if created:
-        home_page.content = 'This is your temporary home page. Edit it in the admin'
+        home_page.content = 'This is your temporary home page. Edit it in the admin.'
         home_page.save()
     return locals()
 
@@ -25,7 +25,12 @@ def event(request, year):
     try:
         event = Event.objects.get(start__year=year)
     except Event.DoesNotExist:
-        return HttpResponseNotFound('<h1>404 Not Found</h1>')
+        if Event.objects.all().exists():
+            try:
+                event = Event.objects.all().order_by('-start')[0]
+            except IndexError:
+                event = None
+        #return HttpResponseNotFound('<h1>404 Not Found</h1>')
     page = 'sessions'
 
     return locals()

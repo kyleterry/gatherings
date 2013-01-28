@@ -4,8 +4,10 @@
 {% block event-content %}
 <div class="row">
     <div class="span9">
-    <h2>{{page.title}}</h2>
-    {{page.content|markdown:"safe"}}
+        <div class="page-header">
+            <h2>{{page.title}}</h2>
+        </div>
+        {{page.content|markdown:"safe"}}
     </div>
 </div>
 

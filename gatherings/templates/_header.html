@@ -3,10 +3,12 @@
         <div class="row header-contents">
             {% include "_user_nav.html" %}
             {% include "_nav.html" %}
-            <h1>RE<span class="muted">C<i class="icon-screenshot"></i>N</span></h1>
+            <h1>RE<span class="muted">CON</span></h1>
         </div>
+        {% if next_event %}
         <div class="pull-right conference-date">
             <span class="label label-info"><i class="icon-star"></i> {{next_event.start|date:"N jS"}} - {{next_event.end|date:"N jS"}} in Portland, OR <i class="icon-star"></i></span>
         </div>
+        {% endif %}
     </div>
 </header>

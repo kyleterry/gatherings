@@ -25,22 +25,7 @@
     <hr>
 <div class="row">
     <div class="span12">
-        <h3>News</h3>
-        <div id="news">
-        {% for post in news %}
-        <div class="article">
-            <h4><a href="{% url news_view_post post.pk %}">{{post.title}}</a> <small>{{post.created_at}}</small></h4>
-            <p>{{post.content|markdown:"safe"}}</p>
-            {% if post.tags.count > 0 %}
-            <div class="tags">
-                <i class="icon-tag"></i>
-                {% for tag in post.tags.all %}
-                <span class="label label-info">{{tag.name}}</span>
-                {% endfor %}
-            </div>
-            {% endif %}
-        </div>
-        {% endfor %}
+        {% include "conference/_news.html" %}
     </div>
 </div>
 {% endblock content %}
