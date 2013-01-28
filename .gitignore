@@ -2,3 +2,4 @@
 *.swp
 *.swo
 media
+local_settings.py
