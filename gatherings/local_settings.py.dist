@@ -1,0 +1,17 @@
+from gatherings.settings import *
+
+ADMINS = (
+    ('Kyle Terry', 'kyle@kyleterry.com'),
+)
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'gatherings',
+        'USER': 'kyle',
+        'PASSWORD': 'testing',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}

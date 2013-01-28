@@ -5,22 +5,8 @@ TEMPLATE_DEBUG = DEBUG
 
 PROJECT_ROOT = abspath(join(dirname(__file__), '..'))
 
-ADMINS = (
-    ('Kyle Terry', 'kyle@kyleterry.com'),
-)
-
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gatherings',
-        'USER': 'kyle',
-        'PASSWORD': 'testing',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
