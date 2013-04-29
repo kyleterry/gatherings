@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row">
     <div class="span12">
-        <form method="post" action="{% url login %}" class="form-horizontal">
+        <form method="post" action="{% url 'login' %}" class="form-horizontal">
             {% csrf_token %}
             <div class="control-group">
                 <div class="controls">

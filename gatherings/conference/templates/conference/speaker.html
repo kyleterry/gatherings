@@ -14,7 +14,7 @@
         <div class="speakers">
             <div class="row speaker">
                 <div class="span9">
-                    <h3><i class="icon-user"></i> <a href="{% url conference_speaker speaker.pk %}">{{speaker.full_name}}</a></h3>
+                    <h3><i class="icon-user"></i> <a href="{% url 'conference_speaker' speaker.pk %}">{{speaker.full_name}}</a></h3>
                     <div class="bio">
                         {% if speaker.image %}
                         <img class="pull-left" src="{{speaker.image_thumbnail.url}}">
@@ -38,7 +38,7 @@
         </div>
         {% for session in speaker.session_set.all %}
         <div class="session">
-            <h3><a href="{% url conference_event 2013 %}#{{session.name|slugify}}">{{session.name}}</a></h3>
+            <h3><a href="{% url 'conference_event' 2013 %}#{{session.name|slugify}}">{{session.name}}</a></h3>
             {{session.description|markdown}}
         </div>
         {% endfor %}

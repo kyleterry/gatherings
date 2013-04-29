@@ -3,7 +3,7 @@
 <div id="news">
 {% for post in news %}
 <div class="article">
-    <h4><a href="{% url news_view_post post.pk %}">{{post.title}}</a> <small>{{post.created_at}}</small></h4>
+    <h4><a href="{% url 'news_view_post' post.pk %}">{{post.title}}</a> <small>{{post.created_at}}</small></h4>
     <p>{{post.content|markdown}}</p>
     {% if post.tags.count > 0 %}
     <div class="tags">

@@ -9,7 +9,7 @@
         <div class="page-header"><h2>All News</h2></div>
         {% for post in news %}
         <div class="post">
-            <h3><a href="{% url news_view_post post.pk %}">{{post.title}}</a></h3>
+            <h3><a href="{% url 'news_view_post' post.pk %}">{{post.title}}</a></h3>
             {{post.content|markdown}}
             {% if post.tags.exists %}
             <div class="post-tags">

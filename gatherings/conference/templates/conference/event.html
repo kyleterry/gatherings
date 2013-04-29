@@ -68,7 +68,7 @@
                     {% if session.speakers.exists %}
                     <p>{% if session.speakers.count > 1 %}<i class="icon-group" title="Panel session"></i>{% else %}<i class="icon-user" title="One speaker"></i>{% endif %}
                         {% for speaker in session.speakers.all %}
-                        <a href="{% url conference_speaker speaker.pk %}">{{speaker.full_name}}</a>{% if not forloop.last %},{% endif %}
+                        <a href="{% url 'conference_speaker' speaker.pk %}">{{speaker.full_name}}</a>{% if not forloop.last %},{% endif %}
                         {% endfor %}
                     </p>
                     {% endif %}

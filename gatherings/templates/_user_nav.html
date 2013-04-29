@@ -1,22 +1,22 @@
             <ul class="nav nav-user pull-right">
                 {% if not request.user.is_authenticated %}
                 <li>
-                    <a href="{% url login %}">Login</a>
+                    <a href="{% url 'login' %}">Login</a>
                 </li>
                 {% else %}
                 <li>
                     <i class="icon-user"></i>
-                    <a href="{% url conference_speaker_edit %}">{{request.user.username}}</a>
+                    <a href="{% url 'conference_speaker_edit' %}">{{request.user.username}}</a>
                 </li>
                 {% if request.user.is_superuser %}
                 <li>
                     <i class="icon-dashboard"></i>
-                    <a href="{% url admin:index %}">Admin</a>
+                    <a href="{% url 'admin:index' %}">Admin</a>
                 </li>
                 {% endif %}
                 <li>
                     <i class="icon-signout"></i>
-                    <a href="{% url logout %}">Logout</a>
+                    <a href="{% url 'logout' %}">Logout</a>
                 </li>
                 {% endif %}
             </ul>
