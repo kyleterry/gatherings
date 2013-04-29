@@ -50,7 +50,7 @@ def speakers(self):
         event = Event.objects.get(start__year=now.year)
     except Event.DoesNotExist:
         return HttpResponseNotFound('<h1>404 Not Found</h1>')
-    speakers = Speaker.objects.filter(session__event=event).distinct()
+    speakers = Speaker.objects.filter(events=event).distinct()
     page = 'speakers'
     return locals()
 

@@ -92,6 +92,7 @@ class Speaker(models.Model):
                                      image_field='image',
                                      format='PNG',
                                      options={'quality': 90})
+    events = models.ManyToManyField('Event', null=True, blank=True)
 
     @property
     def full_name(self):
