@@ -4,10 +4,8 @@ from django.http import HttpResponseNotFound
 
 from annoying.decorators import render_to
 
-from gatherings.conference.models import (Event, Speaker, SESSION_TYPE_BREAK,
-        SESSION_TYPE_TALK, SESSION_TYPE_LIGHTNING_TALK)
+from gatherings.conference.models import Event, Speaker
 from gatherings.conference.forms import SpeakerForm
-from gatherings.news.models import Post
 from gatherings.cms.models import Page
 
 

@@ -1,4 +1,4 @@
-from gatherings.settings import *
+from .base import *
 
 ADMINS = (
     ('Kyle Terry', 'kyle@kyleterry.com'),
@@ -11,8 +11,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'gatherings',
         'USER': 'kyle',
-        'PASSWORD': 'testing',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }

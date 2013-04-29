@@ -3,7 +3,7 @@ from os.path import join, abspath, dirname
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-PROJECT_ROOT = abspath(join(dirname(__file__), '..'))
+PROJECT_ROOT = abspath(join(dirname(__file__), '..', '..'))
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -111,6 +111,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.markup',
+    'django_extensions',
     'gatherings.cms',
     'gatherings.conference',
     'gatherings.news',

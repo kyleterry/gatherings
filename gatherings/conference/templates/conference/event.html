@@ -53,7 +53,7 @@
             {% endfor %}
         </div>
         <div class="sessions">
-        {% for session in event.session_set.ordered_for_event_display %}
+        {% for session in event.session_set.published.ordered_for_event_display %}
             <div class="row-fluid session">
                 <a href="#{{session.name|slugify}}" name="{{session.name|slugify}}"></a>
                 <div class="span6">

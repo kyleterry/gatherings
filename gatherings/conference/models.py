@@ -6,6 +6,9 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, Adjust
 
 from gatherings.conference.managers import SessionManager
+from gatherings.conference.constants import (SESSION_TYPE_TALK,
+        SESSION_TYPE_LIGHTNING_TALK, SESSION_TYPE_BREAK, SESSION_TYPE_CHOICES,
+        SESSION_STATUS_DRAFT, SESSION_STATUS_PUBLISHED, SESSION_STATUS_CHOICES)
 
 
 class Event(models.Model):
@@ -26,6 +29,7 @@ class Event(models.Model):
         sessions = {}
         for dt in self.get_datetimes():
             sessions[dt] = self.session_set.filter(
+                status=SESSION_STATUS_PUBLISHED,
                 start__startswith=dt.date()).order_by('start')
         return sessions
 
@@ -44,15 +48,6 @@ class Room(models.Model):
         return self.name
 
 
-SESSION_TYPE_TALK = 1
-SESSION_TYPE_LIGHTNING_TALK = 2
-SESSION_TYPE_BREAK = 3
-SESSION_TYPE_CHOICES = (
-    (SESSION_TYPE_TALK, 'Talk'),
-    (SESSION_TYPE_LIGHTNING_TALK, 'Lightning Talk'),
-    (SESSION_TYPE_BREAK, 'Break'),
-)
-
 class Session(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -61,6 +56,8 @@ class Session(models.Model):
     speakers = models.ManyToManyField('Speaker', null=True, blank=True)
     session_type = models.IntegerField(default=SESSION_TYPE_TALK,
                                        choices=SESSION_TYPE_CHOICES)
+    status = models.IntegerField(default=SESSION_STATUS_DRAFT,
+                                 choices=SESSION_STATUS_CHOICES)
     start = models.DateTimeField()
     end = models.DateTimeField()
 
@@ -80,6 +77,10 @@ class Session(models.Model):
     @property
     def is_lightning_talk(self):
         return self.session_type == SESSION_TYPE_LIGHTNING_TALK
+
+    @property
+    def is_published(self):
+        return self.status == SESSION_STATUS_PUBLISHED
 
 
 class Speaker(models.Model):
