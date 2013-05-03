@@ -85,7 +85,7 @@ class Session(models.Model):
 
 class Speaker(models.Model):
     bio = models.TextField()
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, null=True, blank=True)
     tags = models.ManyToManyField('SpeakerTag', null=True, blank=True)
     image = models.ImageField(upload_to='speaker_images', null=True, blank=True)
     image_thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1),
