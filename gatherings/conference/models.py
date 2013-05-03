@@ -58,8 +58,8 @@ class Session(models.Model):
                                        choices=SESSION_TYPE_CHOICES)
     status = models.IntegerField(default=SESSION_STATUS_DRAFT,
                                  choices=SESSION_STATUS_CHOICES)
-    start = models.DateTimeField()
-    end = models.DateTimeField()
+    start = models.DateTimeField(null=True, blank=True)
+    end = models.DateTimeField(null=True, blank=True)
 
     objects = SessionManager()
 
