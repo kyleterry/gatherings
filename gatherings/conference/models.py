@@ -50,7 +50,7 @@ class Room(models.Model):
 
 class Session(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     event = models.ForeignKey('Event')
     room = models.ForeignKey('Room', null=True, blank=True)
     speakers = models.ManyToManyField('Speaker', null=True, blank=True)
