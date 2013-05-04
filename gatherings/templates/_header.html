@@ -3,7 +3,10 @@
         <div class="row header-contents">
             {% include "_user_nav.html" %}
             {% include "_nav.html" %}
+            {% comment %}
             <h1>RE<span class="muted">CON</span></h1>
+            {% endcomment %}
+            <h1><img src="{{STATIC_URL}}img/recon.png"></h1>
         </div>
         {% if next_event %}
         <div class="pull-right conference-date">

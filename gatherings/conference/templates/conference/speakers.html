@@ -15,7 +15,7 @@
         {% for speaker in speakers %}
             <div class="row speaker">
                 <div class="span9">
-                    <h3><i class="icon-user"></i> <a href="{% url 'conference_speaker' speaker.pk %}">{{speaker.full_name}}</a></h3>
+                    <h3><i class="icon-user"></i> <a href="{% url 'conference-speaker' speaker.pk %}">{{speaker.full_name}}</a></h3>
                     <div class="bio">
                         {% if speaker.image %}
                         <img class="pull-left" src="{{speaker.image_thumbnail.url}}">
