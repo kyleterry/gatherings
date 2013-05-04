@@ -1,3 +1,4 @@
+import collections
 from datetime import timedelta
 
 from django.contrib.auth.models import User
@@ -26,7 +27,7 @@ class Event(models.Model):
 
     @property
     def sessions_by_days_struct(self):
-        sessions = {}
+        sessions = collections.OrderedDict()
         for dt in self.get_datetimes():
             sessions[dt] = self.session_set.filter(
                 status=SESSION_STATUS_PUBLISHED,
