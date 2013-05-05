@@ -28,6 +28,11 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 #USE_TZ = True
 
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_IMPORTS = (
+    'django_slow_log.middleware',
+)
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = join(PROJECT_ROOT, 'media')
@@ -78,6 +83,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_slow_log.middleware.SlowLogMiddleware',
 )
 
 ROOT_URLCONF = 'gatherings.urls'
@@ -112,6 +118,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.markup',
     'django_extensions',
+    'django_slow_log',
+    'djcelery',
     'gatherings.cms',
     'gatherings.conference',
     'gatherings.news',
