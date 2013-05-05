@@ -1,0 +1,12 @@
+[Unit]
+Description=%I Gatherings Celery Process
+
+[Service]
+Type=forking
+User=%I
+Group=%I
+PIDFile=/srv/%I/%I-celeryd.pid
+ExecStart=/srv/%I/.virtualenvs/gatherings/bin/python /srv/%I/gatherings/manage.py celeryd -l info
+
+[Install]
+WantedBy=multi-user.target

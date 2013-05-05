@@ -1,0 +1,12 @@
+[Unit]
+Description=%I Gatherings Gunicorn Process
+
+[Service]
+Type=forking
+User=%I
+Group=%I
+PIDFile=/srv/%I/%I-gatherings.pid
+ExecStart=/srv/%I/.virtualenvs/gatherings/bin/python /srv/%I/gatherings/manage.py run_gunicorn 127.0.0.1:8050 -w 4
+
+[Install]
+WantedBy=multi-user.target
