@@ -8,7 +8,7 @@
                     <i class="icon-user"></i>
                     <a href="{% url 'conference_speaker_edit' %}">{{request.user.username}}</a>
                 </li>
-                {% if request.user.is_superuser %}
+                {% if request.user.is_staff %}
                 <li>
                     <i class="icon-dashboard"></i>
                     <a href="{% url 'admin:index' %}">Admin</a>
