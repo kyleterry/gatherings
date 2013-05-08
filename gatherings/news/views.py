@@ -12,7 +12,7 @@ def list_all(request):
 
 @render_to('news/list.html')
 def list_by_tag(request, tag):
-    tag = get_object_or_404(Tag, name=tag)
+    tag = get_object_or_404(Tag, slug=tag)
     news = Post.objects.published.filter(tags=tag).order_by('-created_at')
     return locals()
 
