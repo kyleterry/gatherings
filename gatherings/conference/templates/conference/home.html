@@ -2,9 +2,9 @@
 {% load markup %}
 
 {% block css %}{{block.super}}
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
+    <link rel="stylesheet" href="{{STATIC_URL}}conference/css/leaflet.css" />
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
+        <link rel="stylesheet" href="{{STATIC_URL}}conference/css/leaflet.ie.css" />
     <![endif]-->
     <link rel="stylesheet" href="{{STATIC_URL}}conference/css/map.css" />
 {% endblock css %}
