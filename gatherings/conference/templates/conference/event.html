@@ -39,7 +39,12 @@
                 <tbody>
                     {% for session in sessions %}
                     <tr class="{% if session.is_break %}break info{% endif %}">
-                        <td style="width: 50%"><i class="icon-time"></i> {{session.start|date:"P"}}</td>
+                        <td style="width: 50%">
+                            <i class="icon-time"></i> {{session.start|date:"P"}}
+                            {% if not session.is_break and session.room %}
+                            <br><i class="icon-flag"></i> {{session.room.name}}
+                            {% endif %}
+                        </td>
                         <td>{% if session.speakers.exists %}
                             {% for speaker in session.speakers.all %}{{speaker.full_name}}{% if not forloop.last %}, {% endif %}{% endfor %}<br>
                             {% endif %}
